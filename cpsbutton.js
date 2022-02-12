@@ -7,7 +7,7 @@ let maxParticles = 10;
 
 document.getElementById("particles").oninput = function() {
 	const text = document.getElementById("particlesText");
-  maxParticles = this.value;
+  	maxParticles = Number(this.value);
 	text.innerHTML = text.innerHTML.split(" ")[0] + " " + maxParticles;
 	if (maxParticles>=15)
 		text.style.color = "light_red";
