@@ -10,7 +10,7 @@ document.getElementById("particles").oninput = function() {
   	maxParticles = Number(this.value);
 	text.innerHTML = text.innerHTML.split(" ")[0] + " " + maxParticles;
 	if (maxParticles>=15)
-		text.style.color = "#B22222";
+		text.style.color = "B22222";
 	else
 		text.style.color = "c7c7c7";
 }
