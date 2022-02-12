@@ -12,7 +12,7 @@ document.getElementById("particles").oninput = function() {
 	if (maxParticles>=15)
 		text.style.color = "red";
 	else
-		text.style.color = "c7c7c7";
+		text.style.color = "#c7c7c7";
 }
 
 const clicker = e => {
