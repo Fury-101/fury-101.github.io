@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>website</title>
+	<link href="cpsstyle.scss" type="text/scss" />
+	<link href="style.scss" type="text/scss" />
+	<script src="https://unpkg.com/sass.js"></script>
+	<script src="https://unpkg.com/jajax.js"></script>
+	<!-- sass compiling -->
+	<script>
+		[].slice.call(document.querySelectorAll('link[type="text/scss"]'))
+			.forEach(function(link) {
+				loadSass(link.href)
+				.then(function(css) {
+					var style = document.createElement('style');
+					style.setAttribute('href', link.href);
+					style.type = "text/css";
+					style.innerText = css;
+					link.parentNode.insertBefore(style, link);
+					link.parentNode.removeChild(link);                    
+				})
+			});
+
+		function loadSass(scss) {
+			return jajax(scss.split('/')[scss.split('/').length-1])
+			.then(function(scss) {
+				return new Promise(function(resolve){
+					Sass.compile(scss, function(result) {
+						resolve(result.text);
+					});
+				})
+			});
+		}
+	</script>		
+	<!-- chart.js -->
+	<script src ='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js'></script>
+	
+	<script>
+		if (!Date.now)
+			Date.now = () => new Date().getTime();
+	</script>
+</head>
+<body>
+	<div class = "navbar">
+		<ul>
+  		<li><a href="index.html">Home</a></li>
+  		<li><a class="active" href="cpstest.html">CPS</a></li>
+		</ul>
+	</div>
+
+	<div class = "page">
+	<div class = "dropdown">
+		<button id = "dropdown" onclick = "openDropdown()">Mode</button>
+		<div id = "dropdown-content" class = "dropdown-content">
+			<btn onclick = "cont()">Continuous</btn>
+			<btn id = "timed-button">Timed</btn>
+				<div id = "timed-content" class = "timed-content">
+					<btn onclick = "s5()"> 5 Seconds</btn>
+					<btn onclick = "s10()"> 10 Seconds</btn>
+					<btn onclick = "s20()"> 20 Seconds</btn>
+				</div>
+			<btn onclick = "dc()">Double Click</btn>
+		</div>
+	</div>
+
+	<p id="particlesText">Particles: 10</p>
+	<input type="range" min="0" max="30" value="10" id="particles"></input>
+	
+	<button class = "unselectable" type="button" id="clicker">Click</button>
+	<p id = "cps" style = "margin-bottom:0;"></p>
+	<p id = "text" style = "margin:0; padding-top:0;">clicks in the last second</p>
+	<!-- <canvas id="cpsgraph" height = 100></canvas> -->
+
+	<script src = "dropdown-modes.js"></script>
+	<!-- <script src="cpsgraph.js"></script> -->
+	<script src="cpsbutton.js"></script>
+	</div>
+</body>
+
+</html>
