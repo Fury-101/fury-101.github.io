@@ -9,32 +9,6 @@
 	<link href="style.scss" type="text/scss" />
 	<script src="https://unpkg.com/sass.js"></script>
 	<script src="https://unpkg.com/jajax.js"></script>
-	<!-- sass compiling -->
-	<script>
-		[].slice.call(document.querySelectorAll('link[type="text/scss"]'))
-			.forEach(function(link) {
-				loadSass(link.href)
-				.then(function(css) {
-					var style = document.createElement('style');
-					style.setAttribute('href', link.href);
-					style.type = "text/css";
-					style.innerText = css;
-					link.parentNode.insertBefore(style, link);
-					link.parentNode.removeChild(link);                    
-				})
-			});
-
-		function loadSass(scss) {
-			return jajax(scss.split('/')[scss.split('/').length-1])
-			.then(function(scss) {
-				return new Promise(function(resolve){
-					Sass.compile(scss, function(result) {
-						resolve(result.text);
-					});
-				})
-			});
-		}
-	</script>		
 	<!-- chart.js -->
 	<script src ='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js'></script>
 	
